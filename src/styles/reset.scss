@@ -1,0 +1,12 @@
+/* 统一成 RN 中 View 标签的默认样式 */
+view,
+div {
+  box-sizing: border-box;
+}
+
+button {
+  /* 去掉微信小程序 button 的边框 */
+  &:after {
+    display: none;
+  }
+}
