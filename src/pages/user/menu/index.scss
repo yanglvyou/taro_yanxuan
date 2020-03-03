@@ -5,7 +5,8 @@
   background-color: #fff;
 }
 .user-menu__item{
-  flex-basis:33.2%;
+  width: 33.2%;
+  // flex-basis:33.2%;
   display: flex;
   flex-direction: column;
   justify-content: center;

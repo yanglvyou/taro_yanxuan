@@ -2,7 +2,7 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "yang_yanxuan",
 	"description": "练习网易严选",
-	"appid": "touristappid",
+	"appid": "wx4ed77cd4b137a7e3",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,

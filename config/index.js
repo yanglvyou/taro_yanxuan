@@ -1,3 +1,4 @@
+// 项目的通用配置
 const path = require("path");
 const config = {
   projectName: "yang_yanxuan",
