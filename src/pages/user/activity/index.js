@@ -14,7 +14,7 @@ export default class Activity extends Component {
 
   componentDidMount() {
     this.timer = setInterval(() => {
-      this.setState({ active: this.state.active });
+      this.setState({ active: !this.state.active });
     }, 600);
   }
   componentWillUnmount() {

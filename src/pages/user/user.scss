@@ -1,8 +1,18 @@
 .user {
+  position: relative;
   flex: 1;
   height: 100%;
   background: #f4f4f4;
   padding-bottom: 40px;
+  &__empty{
+    height: 40px;
+  }
+
+  &__activity{
+    position: absolute;
+    right: 30px;
+    bottom: 60px;
+  }
 }
 
 .user__logout {

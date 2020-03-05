@@ -4,7 +4,7 @@ const INITIAL_STATE={
   userInfo:{}
 }
 
-export default function user(state=INITIAL_STATE){
+export default function user(state=INITIAL_STATE,action){
   switch(action.type){
     case USER_INFO:{
       return {
