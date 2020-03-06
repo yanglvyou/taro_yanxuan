@@ -4,8 +4,8 @@ import { Loading } from "@components/loading";
 import { connect } from "@tarojs/redux";
 import * as actions from "@action/home";
 // import { dispatchCartNum } from "@actions/cart";
-// import { getWindowHeight } from "@utils/style";
-// import Banner from "./banner";
+import { getWindowHeight } from "@utils/style";
+import Banner from "./banner/index";
 // import Policy from "./policy";
 // import Pin from "./pin";
 // import Operation from "./operation";
@@ -13,7 +13,7 @@ import * as actions from "@action/home";
 // import FlashSale from "./flash-sale";
 // import Popular from "./popular";
 // import Category from "./category";
-// import Recommend from "./recommend";
+import Recommend from "./recommend/index";
 import searchIcon from "./assets/search.png";
 import "./home.scss";
 
@@ -41,10 +41,34 @@ class Home extends Component {
       this.setState({ loaded: true });
     });
     this.props.dispatchSearchCount();
+    this.loadRecommend();
+  }
+
+  loadRecommend=()=>{
+    if(!this.state.hasMore || this.state.loading){
+      return;
+    }
+    const payload={
+      lastItemId:this.state.lastItemId,
+      size:RECOMMEND_SIZE,
+    }
+    this.setState({loading:true});
+    this.props.dispatchRecommend(payload).then((res)=>{
+      console.log('res: ', res);
+      const lastItem = res.rcmdItemList[res.rcmdItemList.length - 1]
+      this.setState({
+        loading: false,
+        hasMore: res.hasMore,
+        lastItemId: lastItem && lastItem.id
+      })
+    }).catch(()=>{
+      this.setState({loading:false})
+    })
   }
 
   render() {
     const { homeInfo, searchCount, recommend, pin } = this.props;
+    console.log('recommend: ', recommend);
     if (!this.state.loaded) {
       return <Loading></Loading>;
     }
@@ -56,6 +80,15 @@ class Home extends Component {
             <Text className="home__search-txt">{`搜索商品，共${searchCount}款好物`}</Text>
           </View>
         </View>
+        <ScrollView
+          scrollY
+          className="home__wrap"
+          // onScrollToLower={}
+          style={{ height: getWindowHeight() }}
+        >
+          <Banner list={homeInfo.focus}></Banner>
+          <Recommend list={recommend}></Recommend>
+        </ScrollView>
       </View>
     );
   }

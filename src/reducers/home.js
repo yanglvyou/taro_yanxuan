@@ -1,7 +1,7 @@
 import {
   HOME_INFO,
   HOME_SEARCH_COUNT,
-  HOME_RECOMEND,
+  HOME_RECOMMEND,
   HOME_PIN
 } from "@constants/home";
 
@@ -40,7 +40,7 @@ export default function Home(state=INITIAL_STATE,action) {
       return {...state,pin}
     }
 
-    case HOME_RECOMEND:{
+    case HOME_RECOMMEND:{
       return {
         ...state,
         recommend:state.recomend.concat(action.payload.rcmdItemList)

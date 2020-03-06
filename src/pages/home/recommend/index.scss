@@ -1,0 +1,44 @@
+@import "@styles/theme.scss";
+.home-recommend {
+  margin-top: 60px;
+  background-color: #fff;
+  &__title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    &-txt {
+      font-size: 35px;
+      color: black;
+      font-weight: bold;
+    }
+  }
+  &__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0 15px;
+    &-item {
+      display: flex;
+      flex-direction: column;
+      padding: 0 0 40px;
+      &-desc {
+        padding: 0 12px;
+        width: 306px;
+        height: 70px;
+        line-height: 70px;
+        color: #9e8962;
+        font-size: 24px;
+        background: #f0ebe2;
+        @include text-ellipsis;
+      }
+      &-img {
+        height: 330px;
+        width: 330px;
+        background: #f4f4f4;
+        border-radius: 4px;
+      }
+    }
+  }
+}
