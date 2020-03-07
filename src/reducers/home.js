@@ -9,7 +9,7 @@ const INITIAL_STATE={
   homeInfo:{},
   searchCount:0,
   pin:[],
-  recomend:[]
+  recommend:[]
 }
 
 export default function Home(state=INITIAL_STATE,action) {
@@ -43,7 +43,7 @@ export default function Home(state=INITIAL_STATE,action) {
     case HOME_RECOMMEND:{
       return {
         ...state,
-        recommend:state.recomend.concat(action.payload.rcmdItemList)
+        recommend:state.recommend.concat(action.payload.rcmdItemList)
       }
     }
 

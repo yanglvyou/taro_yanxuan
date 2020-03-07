@@ -44,31 +44,34 @@ class Home extends Component {
     this.loadRecommend();
   }
 
-  loadRecommend=()=>{
-    if(!this.state.hasMore || this.state.loading){
+  loadRecommend = () => {
+    if (!this.state.hasMore || this.state.loading) {
       return;
     }
-    const payload={
-      lastItemId:this.state.lastItemId,
-      size:RECOMMEND_SIZE,
-    }
-    this.setState({loading:true});
-    this.props.dispatchRecommend(payload).then((res)=>{
-      console.log('res: ', res);
-      const lastItem = res.rcmdItemList[res.rcmdItemList.length - 1]
-      this.setState({
-        loading: false,
-        hasMore: res.hasMore,
-        lastItemId: lastItem && lastItem.id
+    const payload = {
+      lastItemId: this.state.lastItemId,
+      size: RECOMMEND_SIZE
+    };
+    this.setState({ loading: true });
+    this.props
+      .dispatchRecommend(payload)
+      .then(res => {
+        console.log("res: ", res);
+        const lastItem = res.rcmdItemList[res.rcmdItemList.length - 1];
+        this.setState({
+          loading: false,
+          hasMore: res.hasMore,
+          lastItemId: lastItem && lastItem.id
+        });
       })
-    }).catch(()=>{
-      this.setState({loading:false})
-    })
-  }
+      .catch(() => {
+        this.setState({ loading: false });
+      });
+  };
 
   render() {
     const { homeInfo, searchCount, recommend, pin } = this.props;
-    console.log('recommend: ', recommend);
+    console.log("recommend: ", recommend, this.state.lastItemId,this.state.loading);
     if (!this.state.loaded) {
       return <Loading></Loading>;
     }
@@ -83,11 +86,16 @@ class Home extends Component {
         <ScrollView
           scrollY
           className="home__wrap"
-          // onScrollToLower={}
+          onScrollToLower={this.loadRecommend}
           style={{ height: getWindowHeight() }}
         >
           <Banner list={homeInfo.focus}></Banner>
           <Recommend list={recommend}></Recommend>
+          {this.state.loading && (
+            <View className="home__loading">
+              <Text className="home__loading-txt">正在加载中...</Text>
+            </View>
+          )}
         </ScrollView>
       </View>
     );

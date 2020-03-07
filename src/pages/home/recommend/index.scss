@@ -18,7 +18,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    padding: 0 15px;
+    padding: 0 5px;
+    &::after {
+      content: "";
+      display: block;
+      width: 44vw;
+    }
     &-item {
       display: flex;
       flex-direction: column;
@@ -38,6 +43,65 @@
         width: 330px;
         background: #f4f4f4;
         border-radius: 4px;
+      }
+      &-info {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      &-name {
+        color: $text-color;
+        font-size: 28px;
+        width: 330px;
+        line-height: 40px;
+        // @include text-ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &-price-wrap {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      &-price {
+        color: $primary-color;
+        font-size: 32px;
+        line-height: 48px;
+      }
+      &-price--origin {
+        vertical-align: bottom;
+        margin-left: 14px;
+        color: $text-color-lighter;
+        font-size: 30px;
+        font-weight: 200;
+        line-height: 48px;
+        text-decoration: line-through;
+        text-decoration-color: $text-color-lighter;
+      }
+      &-commend {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 10px;
+        padding: 0 10px;
+        height: 70px;
+        border-radius: 35px;
+        background: #f3f3f3;
+        width: 330px;
+        &-img {
+          width: 50px;
+          height: 50px;
+          border-radius: 25px;
+        }
+        &-txt {
+          flex: 1;
+          margin-left: 10px;
+          color: $text-color-lighter;
+          font-size: 24px;
+          line-height: 30px;
+          @include lamp-clamp(2);
+        }
       }
     }
   }

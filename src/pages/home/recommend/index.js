@@ -10,7 +10,7 @@ export default class Recommend extends Component {
   };
 
   render() {
-    const {list} =this.props;
+    const { list } = this.props;
     return (
       <View className="home-recommend">
         <View className="home-recommend__title">
@@ -27,11 +27,32 @@ export default class Recommend extends Component {
                     className="home-recommend__list-item-img"
                     src={categoryItem.listPicUrl}
                   />
-                  {!!categoryItem.simpleDesc && !categoryItem.simpleDescClose &&
-                    <Text className='home-recommend__list-item-desc'>
-                      {categoryItem.simpleDesc}
+                  {!!categoryItem.simpleDesc &&
+                    !categoryItem.simpleDescClose && (
+                      <Text className="home-recommend__list-item-desc">
+                        {categoryItem.simpleDesc}
+                      </Text>
+                    )}
+                  <View className="home-recommend__list-item-info">
+                    <Text
+                      className="home-recommend__list-item-name"
+                    >
+                      {categoryItem.name}
                     </Text>
-                  }
+
+                    <View className="home-recommend__list-item-price-wrap">
+                      <Text className="home-recommend__list-item-price">
+                        ¥
+                        {categoryItem.activityPrice || categoryItem.retailPrice}
+                      </Text>
+                      {!!categoryItem.activityPrice && (
+                        <Text className="home-recommend__list-item-price--origin">
+                          ¥{categoryItem.retailPrice}
+                        </Text>
+                      )}
+                    </View>
+
+                  </View>
                 </View>
               );
             })}
