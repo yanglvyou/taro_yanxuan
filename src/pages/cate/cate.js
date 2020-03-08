@@ -5,6 +5,8 @@ import { connect } from "@tarojs/redux";
 import * as actions from "../../actions/cate";
 import { getWindowHeight } from "@utils/style";
 import Menu from "./menu/index";
+import List from "./list/index";
+import Banner from "./banner/index";
 import "./cate.scss";
 
 @connect(state => state.cate, { ...actions })
@@ -47,7 +49,13 @@ class Index extends Component {
 
   render() {
     const { menu, category } = this.props;
+    console.log('category: ', category);
     const { current, loading } = this.state;
+    const currentCategory = category.find(item => item.id === current) || {};
+    const banner = currentCategory.focusBannerList || [];
+    console.log("banner: ", banner);
+
+    const list = currentCategory.categoryGroupList || [];
     const height = getWindowHeight();
     if (!this.state.loaded) {
       return <Loading />;
@@ -57,6 +65,16 @@ class Index extends Component {
         <ScrollView scrollY style={{ height }} className="cate__menu">
           <Menu current={current} list={menu} onClick={this.handleMenu}></Menu>
         </ScrollView>
+        {loading ? (
+          <View />
+        ) : (
+          <ScrollView scrollY className="cate__list" style={{ height }}>
+            <View className="cate__list-wrap">
+              <Banner banner={banner} />
+              <List list={list} />
+            </View>
+          </ScrollView>
+        )}
       </View>
     );
   }
